@@ -1,0 +1,24 @@
+{
+  "name": "vue-axios",
+  "version": "1.0.0",
+  "description": "A small wrapper for integrating axios to Vuejs",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/imcvampire/vue-axios.git"
+  },
+  "keywords": [
+    "vue",
+    "axios",
+    "wrapper"
+  ],
+  "author": "Nguyen Quoc Anh (imcvampire)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/imcvampire/vue-axios/issues"
+  },
+  "homepage": "https://github.com/imcvampire/vue-axios#readme"
+}
