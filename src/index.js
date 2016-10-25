@@ -4,6 +4,8 @@ import axios from 'axios';
  *  Copied from vue-resource
  */
 
+const { slice } = [];
+
 function isFunction(val) {
   return typeof val === 'function';
 }

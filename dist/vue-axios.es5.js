@@ -16,6 +16,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  *  Copied from vue-resource
  */
 
+var slice = [].slice;
+
+
 function isFunction(val) {
   return typeof val === 'function';
 }
