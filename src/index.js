@@ -1,5 +1,3 @@
-import axios from 'axios';
-
 /**
  *  Copied from vue-resource
  */
@@ -63,10 +61,15 @@ function options(fn, obj, opts) {
  * @param Vue
  */
 
-function plugin(Vue) {
+function plugin(Vue, axios) {
 
   if (plugin.installed) {
     return;
+  }
+
+  if (!axios) {
+    console.error('You have to install axios')
+    return
   }
 
   Vue.axios = axios

@@ -1,6 +1,6 @@
 {
   "name": "vue-axios",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "A small wrapper for integrating axios to Vuejs",
   "main": "dist/vue-axios.min.js",
   "scripts": {
@@ -31,6 +31,5 @@
     "gulp-uglifyjs": "^0.6.2"
   },
   "dependencies": {
-    "axios": "^0.15.2"
   }
 }

@@ -6,12 +6,6 @@ Object.defineProperty(exports, "__esModule", {
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-var _axios = require('axios');
-
-var _axios2 = _interopRequireDefault(_axios);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 /**
  *  Copied from vue-resource
  */
@@ -76,13 +70,18 @@ function options(fn, obj, opts) {
  * @param Vue
  */
 
-function plugin(Vue) {
+function plugin(Vue, axios) {
 
   if (plugin.installed) {
     return;
   }
 
-  Vue.axios = _axios2.default;
+  if (!axios) {
+    console.error('You have to install axios');
+    return;
+  }
+
+  Vue.axios = axios;
 
   Object.defineProperties(Vue.prototype, {
 
