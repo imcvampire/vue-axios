@@ -17,10 +17,10 @@ Vue.use(VueAxios, axios)
 ```
 
 ### Script:
-Just add 3 script in order: `vue`, `axios` and `vue-axios` to your `document`.
+Just add 3 scripts in order: `vue`, `axios` and `vue-axios` to your `document`.
 
 ## Usage:
-This wrapper bind `axios` to var `Vue` or `this` if you're using single file component.
+This wrapper bind `axios` to `Vue` or `this` if you're using single file component.
 
 You can `axios` like this:
 ```
