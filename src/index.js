@@ -61,6 +61,7 @@ function options(fn, obj, opts) {
 /**
  * Install plugin
  * @param Vue
+ * @param axios
  */
 
 function plugin(Vue, axios) {
