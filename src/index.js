@@ -1,3 +1,5 @@
+(function () {
+
 /**
  *  Copied from vue-resource
  */
@@ -85,8 +87,12 @@ function plugin(Vue, axios) {
   });
 }
 
-if (typeof window !== 'undefined' && window.Vue && window.axios) {
-  window.Vue.use(plugin, window.axios);
+if (typeof exports == "object") {
+  module.exports = plugin;
+} else if (typeof define == "function" && define.amd) {
+  define([], function(){ return plugin });
+} else if (window.Vue && window.axios) {
+  Vue.use(plugin, window.axios);
 }
 
-export default plugin;
+})();
