@@ -1,11 +1,15 @@
 {
   "name": "vue-axios",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "A small wrapper for integrating axios to Vuejs",
   "main": "dist/vue-axios.min.js",
   "scripts": {
     "test": "npm run test"
   },
+  "files": [
+    "dist",
+    "src"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/imcvampire/vue-axios.git"
@@ -22,12 +26,14 @@
   },
   "homepage": "https://github.com/imcvampire/vue-axios#readme",
   "devDependencies": {
-    "vue": "^2.0.3",
     "babel-core": "^6.18.0",
     "babel-preset-es2015": "^6.18.0",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
     "gulp-rename": "^1.2.2",
     "gulp-uglifyjs": "^0.6.2"
+  },
+  "peerDependencies": {
+    "vue": ">= 1.0.0"
   }
 }
