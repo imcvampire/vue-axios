@@ -1,99 +1,101 @@
 (function () {
 
-/**
- *  Copied from vue-resource
- */
+    /**
+     *  Copied from vue-resource
+     */
 
-const { slice } = [];
+    const {slice} = [];
 
-function isFunction(val) {
-  return typeof val === 'function';
-}
-
-const isArray = Array.isArray;
-
-function isPlainObject(obj) {
-  return isObject(obj) && Object.getPrototypeOf(obj) == Object.prototype;
-}
-
-function isObject(obj) {
-  return obj !== null && typeof obj === 'object';
-}
-
-function _merge(target, source, deep) {
-  for (var key in source) {
-    if (deep && (isPlainObject(source[key]) || isArray(source[key]))) {
-      if (isPlainObject(source[key]) && !isPlainObject(target[key])) {
-        target[key] = {};
-      }
-      if (isArray(source[key]) && !isArray(target[key])) {
-        target[key] = [];
-      }
-      _merge(target[key], source[key], deep);
-    } else if (source[key] !== undefined) {
-      target[key] = source[key];
+    function isFunction(val) {
+        return typeof val === 'function';
     }
-  }
-}
 
-function merge(target) {
+    const isArray = Array.isArray;
 
-  var args = slice.call(arguments, 1);
+    function isPlainObject(obj) {
+        return isObject(obj) && Object.getPrototypeOf(obj) == Object.prototype;
+    }
 
-  args.forEach((source) => {
-    _merge(target, source, true);
-  });
+    function isObject(obj) {
+        return obj !== null && typeof obj === 'object';
+    }
 
-  return target;
-}
+    function _merge(target, source, deep) {
+        for (var key in source) {
+            if (deep && (isPlainObject(source[key]) || isArray(source[key]))) {
+                if (isPlainObject(source[key]) && !isPlainObject(target[key])) {
+                    target[key] = {};
+                }
+                if (isArray(source[key]) && !isArray(target[key])) {
+                    target[key] = [];
+                }
+                _merge(target[key], source[key], deep);
+            } else if (source[key] !== undefined) {
+                target[key] = source[key];
+            }
+        }
+    }
 
-function options(fn, obj, opts) {
+    function merge(target) {
 
-  opts = opts || {};
+        var args = slice.call(arguments, 1);
 
-  if (isFunction(opts)) {
-    opts = opts.call(obj);
-  }
+        args.forEach((source) => {
+            _merge(target, source, true);
+        });
 
-  return merge(fn.bind({$vm: obj, $options: opts}), fn, {$options: opts});
-}
+        return target;
+    }
 
-/**
- * Install plugin
- * @param Vue
- * @param axios
- */
+    function options(fn, obj, opts) {
 
-function plugin(Vue, axios) {
+        opts = opts || {};
 
-  if (plugin.installed) {
-    return;
-  }
+        if (isFunction(opts)) {
+            opts = opts.call(obj);
+        }
 
-  if (!axios) {
-    console.error('You have to install axios')
-    return
-  }
+        return merge(fn.bind({$vm: obj, $options: opts}), fn, {$options: opts});
+    }
 
-  Vue.axios = axios
+    /**
+     * Install plugin
+     * @param Vue
+     * @param axios
+     */
 
-  Object.defineProperties(Vue.prototype, {
+    function plugin(Vue, axios) {
 
-    axios: {
-      get() {
-        return options(Vue.axios, this, this.$options.axios);
-      }
-    },
+        if (plugin.installed) {
+            return;
+        }
 
-  });
-}
+        if (!axios) {
+            console.error('You have to install axios')
+            return
+        }
 
-if (typeof exports == "object") {
-  module.exports = plugin;
-} else if (typeof define == "function" && define.amd) {
-  define([], function(){ return plugin });
-} else if (window.Vue && window.axios) {
-  Vue.use(plugin, window.axios);
-}
+        Vue.axios = axios
+
+        Object.defineProperties(Vue.prototype, {
+
+            $http: {
+                get() {
+                    return options(Vue.axios, this, this.$options.axios);
+                }
+            },
+
+        });
+    }
+
+    if (typeof exports == "object") {
+        module.exports = plugin;
+    } else if (typeof define == "function" && define.amd) {
+        define([], function () {
+            return plugin
+        });
+    } else if (window.Vue && window.axios) {
+        Vue.use(plugin, window.axios);
+    }
 
 })();
