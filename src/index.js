@@ -9,7 +9,7 @@
 function plugin(Vue, axios) {
 
   if (plugin.installed) {
-    return;
+    return
   }
 
   if (!axios) {
@@ -23,25 +23,25 @@ function plugin(Vue, axios) {
 
     axios: {
       get() {
-        return axios;
+        return axios
       }
     },
 
     $http: {
       get() {
-        return axios;
+        return axios
       }
     }
 
-  });
+  })
 }
 
 if (typeof exports == "object") {
-  module.exports = plugin;
+  module.exports = plugin
 } else if (typeof define == "function" && define.amd) {
-  define([], function(){ return plugin });
+  define([], function(){ return plugin })
 } else if (window.Vue && window.axios) {
-  Vue.use(plugin, window.axios);
+  Vue.use(plugin, window.axios)
 }
 
 })();
