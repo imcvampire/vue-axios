@@ -15,6 +15,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     if (plugin.installed) {
       return;
     }
+    plugin.installed = true;
 
     if (!axios) {
       console.error('You have to install axios');
