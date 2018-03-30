@@ -1,15 +1,17 @@
 {
   "name": "vue-axios",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "A small wrapper for integrating axios to Vuejs",
   "main": "dist/vue-axios.min.js",
   "types": "index.d.ts",
   "scripts": {
     "test": "npm run test"
   },
+  "typing": "index.d.ts",
   "files": [
     "dist",
-    "src"
+    "src",
+    "index.d.ts"
   ],
   "repository": {
     "type": "git",
