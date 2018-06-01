@@ -8,10 +8,6 @@ declare module "vue/types/vue" {
     $http: AxiosInstance;
   }
 
-  namespace Vue {
-    const axios: AxiosInstance;
-  }
-
 }
 
 declare class VueAxios {
