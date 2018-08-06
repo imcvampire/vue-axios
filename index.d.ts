@@ -14,4 +14,4 @@ declare class VueAxios {
   static install: PluginFunction<AxiosInstance>;
 }
 
-export = VueAxios
+export default VueAxios;
