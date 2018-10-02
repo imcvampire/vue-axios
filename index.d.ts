@@ -8,6 +8,9 @@ declare module "vue/types/vue" {
     $http: AxiosInstance;
   }
 
+  interface VueConstructor {
+    axios: AxiosInstance;
+  }
 }
 
 declare class VueAxios {
