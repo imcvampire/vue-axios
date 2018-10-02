@@ -1,6 +1,6 @@
 {
   "name": "vue-axios",
-  "version": "2.1.3",
+  "version": "2.1.4",
   "description": "A small wrapper for integrating axios to Vuejs",
   "main": "dist/vue-axios.min.js",
   "types": "index.d.ts",
