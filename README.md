@@ -22,7 +22,7 @@ Just add 3 scripts in order: `vue`, `axios` and `vue-axios` to your `document`.
 ## Usage:
 This wrapper bind `axios` to `Vue` or `this` if you're using single file component.
 
-You can `axios` like this:
+You can use `axios` like this:
 ```js
 Vue.axios.get(api).then((response) => {
   console.log(response.data)
@@ -36,3 +36,5 @@ this.$http.get(api).then((response) => {
   console.log(response.data)
 })
 ```
+
+Please kindly check full documention of [axios](https://github.com/axios/axios) too 
