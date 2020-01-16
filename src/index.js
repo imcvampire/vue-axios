@@ -19,6 +19,7 @@ function plugin(Vue, axios) {
   }
 
   Vue.axios = axios
+  Vue.$http = axios
 
   Object.defineProperties(Vue.prototype, {
 
