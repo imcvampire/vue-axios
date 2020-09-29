@@ -1,4 +1,3 @@
-
 const { src, dest, series } = require('gulp');
 const babel = require('gulp-babel');
 const uglify = require('gulp-uglifyjs');
