@@ -1,20 +1,18 @@
-import Vue, {PluginFunction, PluginObject} from "vue";
 import { AxiosStatic } from "axios";
+import { App } from "vue";
 
-declare module "vue/types/vue" {
-
-  interface Vue {
-    axios: AxiosStatic;
+export declare function VAxios(app: App): AxiosStatic;
+declare module "@vue/runtime-core" {
+  export interface ComponentCustomProperties {
     $http: AxiosStatic;
+    axios: AxiosStatic;
   }
 
-  interface VueConstructor {
+  export interface App {
     axios: AxiosStatic;
   }
 }
 
-declare class VueAxios {
-  static install: PluginFunction<AxiosStatic>;
-}
+declare function VueAxios(app: App, axios: AxiosStatic): void;
 
 export default VueAxios;
