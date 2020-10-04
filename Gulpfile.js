@@ -5,7 +5,7 @@ const rename = require('gulp-rename');
 const clean = require('gulp-clean');
 
 function build() {
-  return src('src/index.js', { allowEmpty: true })
+  return src('src/index.js')
     .pipe(babel({
       presets: [
         '@babel/env'
