@@ -2,7 +2,7 @@
 A small wrapper for integrating axios to Vuejs
 
 ## How to install:
-### CommonJS:
+### CommonJS/ES6 Module:
 ```bash
 npm install --save axios vue-axios
 ```
