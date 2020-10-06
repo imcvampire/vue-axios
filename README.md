@@ -1,6 +1,14 @@
 # vue-axios
 A small wrapper for integrating axios to Vuejs
 
+## Support matrix
+
+|VueJS \ VueAxios|1.x|2.x|3.x|
+|-|-|-|-|
+|1.x|&#10004;|&#10004;|&#10060;|
+|2.x|&#10004;|&#10004;|&#10060;|
+|3.x|&#10060;|&#10060;|&#10004;|
+
 ## How to install:
 ### ES6 Module:
 ```bash
