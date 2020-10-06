@@ -2,7 +2,7 @@
 A small wrapper for integrating axios to Vuejs
 
 ## How to install:
-### CommonJS/ES6 Module:
+### ES6 Module:
 ```bash
 npm install --save axios vue-axios
 ```
@@ -13,7 +13,8 @@ import Vue from 'vue'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 
-Vue.use(VueAxios, axios)
+const app = Vue.createApp(...)
+app.use(VueAxios, axios)
 ```
 
 ### Script:
