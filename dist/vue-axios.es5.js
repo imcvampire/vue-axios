@@ -1,44 +1,27 @@
 "use strict";
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 (function () {
-
   /**
    * Install plugin
-   * @param Vue
+   * @param app
    * @param axios
    */
-
-  function plugin(Vue, axios) {
-
+  function plugin(app, axios) {
     if (plugin.installed) {
       return;
     }
-    plugin.installed = true;
 
     if (!axios) {
       console.error('You have to install axios');
       return;
     }
 
-    Vue.axios = axios;
-
-    Object.defineProperties(Vue.prototype, {
-
-      axios: {
-        get: function get() {
-          return axios;
-        }
-      },
-
-      $http: {
-        get: function get() {
-          return axios;
-        }
-      }
-
-    });
+    plugin.installed = true;
+    app.axios = axios;
+    app.config.globalProperties.axios = axios;
+    app.config.globalProperties.$http = axios;
   }
 
   if ((typeof exports === "undefined" ? "undefined" : _typeof(exports)) == "object") {

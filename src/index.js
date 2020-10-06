@@ -2,40 +2,26 @@
 
 /**
  * Install plugin
- * @param Vue
+ * @param app
  * @param axios
  */
 
-function plugin(Vue, axios) {
-
+function plugin(app, axios) {
   if (plugin.installed) {
     return
   }
-  plugin.installed = true
 
   if (!axios) {
     console.error('You have to install axios')
     return
   }
 
-  Vue.axios = axios
-  Vue.$http = axios
+  plugin.installed = true;
 
-  Object.defineProperties(Vue.prototype, {
+  app.axios = axios;
 
-    axios: {
-      get() {
-        return axios
-      }
-    },
-
-    $http: {
-      get() {
-        return axios
-      }
-    }
-
-  })
+  app.config.globalProperties.axios = axios;
+  app.config.globalProperties.$http = axios;
 }
 
 if (typeof exports == "object") {
@@ -45,5 +31,4 @@ if (typeof exports == "object") {
 } else if (window.Vue && window.axios) {
   Vue.use(plugin, window.axios)
 }
-
 })();
