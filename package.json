@@ -30,7 +30,8 @@
   "homepage": "https://github.com/imcvampire/vue-axios#readme",
   "dependencies": {
     "axios": "^0.20.0",
-    "vue": "^3.0.0"
+    "semver": "^7.3.2",
+    "vue": "^2.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.11.6",
