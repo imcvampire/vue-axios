@@ -30,7 +30,6 @@ Usage in Vue 3:
 ```js
 const app = Vue.createApp(...)
 app.use(VueAxios, axios)
-app.mount('#app')
 ```
 
 ### Script:

@@ -45,6 +45,7 @@ function plugin(app, axios) {
   }
 
   app.axios = axios;
+  app.$http = axios;
 }
 
 if (typeof exports == "object") {
