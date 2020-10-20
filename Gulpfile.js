@@ -46,19 +46,19 @@ function bundle(opts) {
 
 gulp.task('build', function(){
   return bundle().then(gen => {
-    return file('vue-axios.es5.js', gen.code, {src: true})
-      // .pipe(plumber())
-      // .pipe(sourcemaps.init({loadMaps: true}))
-      // .pipe(sourcemaps.write('./'))
+    return file('vue-axios.es5.js', gen.output.map(o => o.code).join(" "), {src: true})
+      .pipe(plumber())
+      .pipe(sourcemaps.init({loadMaps: true}))
+      .pipe(sourcemaps.write('./'))
       .pipe(gulp.dest(buildPath))
-      // .pipe(filter(['*', '!**/*.js.map']))
-      // .pipe(rename('vue-axios.min.js'))
-      // .pipe(sourcemaps.init({loadMaps: true}))
-      // .pipe(uglify({
-        // preserveComments: 'license'
-      // }))
-      // .pipe(sourcemaps.write('./'))
-      // .pipe(gulp.dest(buildPath));
+      .pipe(filter(['*', '!**/*.js.map']))
+      .pipe(rename('vue-axios.min.js'))
+      .pipe(sourcemaps.init({loadMaps: true}))
+      .pipe(uglify({
+        preserveComments: 'license'
+      }))
+      .pipe(sourcemaps.write('./'))
+      .pipe(gulp.dest(buildPath));
   });
 });
 
