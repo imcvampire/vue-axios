@@ -1,5 +1,6 @@
+import semver from 'semver';
+
 (function () {
-const semver = require('semver')
 /**
  * Install plugin
  * @param app
@@ -8,17 +9,17 @@ const semver = require('semver')
 
 function plugin(app, axios) {
   if (plugin.installed) {
-    return
+    return;
   }
 
   if (!axios) {
-    console.error('You have to install axios')
-    return
+    console.error('You have to install axios');
+    return;
   }
 
   if (semver.valid(app.version) == null) {
-    console.error('Unkown vue version')
-    return
+    console.error('Unkown vue version');
+    return;
   }
 
   plugin.installed = true;
@@ -49,10 +50,10 @@ function plugin(app, axios) {
 }
 
 if (typeof exports == "object") {
-  module.exports = plugin
+  module.exports = plugin;
 } else if (typeof define == "function" && define.amd) {
-  define([], function(){ return plugin })
+  define([], function(){ return plugin });
 } else if (window.Vue && window.axios) {
-  Vue.use(plugin, window.axios)
+  Vue.use(plugin, window.axios);
 }
 })();
