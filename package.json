@@ -2,7 +2,7 @@
   "name": "vue-axios",
   "version": "3.1.0",
   "description": "A small wrapper for integrating axios to Vuejs",
-  "main": "dist/vue-axios.min.js",
+  "main": "dist/vue-axios.es5.js",
   "types": "index.d.ts",
   "scripts": {
     "test": "npm run test"
