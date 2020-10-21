@@ -36,6 +36,7 @@
     "gulp-rollup": "^2.17.0",
     "gulp-sourcemaps": "^2.6.5",
     "gulp-uglify": "^3.0.2",
+    "merge-stream": "^2.0.0",
     "rollup-babel": "^0.6.3",
     "rollup-plugin-babel": "^4.4.0",
     "run-sequence": "^2.2.1",
