@@ -5,7 +5,7 @@
   "main": "dist/vue-axios.es5.js",
   "types": "index.d.ts",
   "scripts": {
-    "test": "npm run test"
+    "build": "gulp"
   },
   "typing": "index.d.ts",
   "files": [
@@ -39,21 +39,19 @@
     "merge-stream": "^2.0.0",
     "rollup-babel": "^0.6.3",
     "rollup-plugin-babel": "^4.4.0",
-    "run-sequence": "^2.2.1",
     "semver": "^7.3.2",
     "vue": "^2.0.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.11.6",
-    "@babel/preset-env": "^7.11.5",
+    "@babel/core": "^7.12.3",
+    "@babel/preset-env": "^7.12.1",
     "@rollup/plugin-commonjs": "^15.1.0",
     "@rollup/plugin-node-resolve": "^9.0.0",
     "gulp": "^4.0.2",
     "gulp-clean": "^0.4.0",
-    "gulp-rename": "^2.0.0",
     "gulp-uglify-es": "^2.0.0",
     "gulp-uglifyjs": "^0.6.2",
-    "rollup": "^2.29.0"
+    "rollup": "^2.32.1"
   },
   "peerDependencies": {
     "vue": ">= 3.0.0"
