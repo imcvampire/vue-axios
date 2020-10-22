@@ -3,7 +3,6 @@ const gulp = require('gulp');
 const plumber = require('gulp-plumber');
 const file = require('gulp-file');
 const filter = require('gulp-filter');
-const rename = require('gulp-rename');
 const merge = require('merge-stream');
 const sourcemaps = require('gulp-sourcemaps');
 const uglify = require('gulp-uglify');
@@ -15,21 +14,24 @@ const { rollup } = require('rollup');
 const babel = require('rollup-plugin-babel');
 const { nodeResolve } = require('@rollup/plugin-node-resolve')
 
-// Misc
-const runSequence = require('run-sequence');
-const { tree } = require('gulp');
-
 // Const
 const buildPath = 'dist/';
 
-function _generate(bundle) {
+/**
+ * Generate scripts with commonjs module
+ * @param {import('rollup').RollupBuild} bundle
+ */
+function bundleCommonJs(bundle) {
   return bundle.generate({
     format: 'commonjs',
   });
 }
 
-function bundle(opts) {
-  return rollup({
+/**
+ * Bundle index.js using rollup + babel
+ */
+async function bundle() {
+  const bundle = await rollup({
     input: 'src/index.js',
     plugins: [
       nodeResolve({ browser: true }),
@@ -41,27 +43,25 @@ function bundle(opts) {
         sourceMaps: true
       })
     ]
-  }).then(bundle => {
-    return _generate(bundle);
   });
+  return bundleCommonJs(bundle);
 }
 
-gulp.task('build', function () {
-  return bundle().then(gen => {
-    const f = filter(['*', '!**/*.js.map',], { restore: true });
-    var data = ['ue-axios.es5.js', 'vue-axios.min.js'];
-    var streams = [];
-    streams = data.map( (name) =>{
-      return file(name, gen.output.map(o => o.code).join(" "), { src: true })
+gulp.task('build', async function () {
+  const generatedBundle = await bundle();
+  const f = filter(['*', '!**/*.js.map',], { restore: true });
+  const data = ['vue-axios.es5.js', 'vue-axios.min.js'];
+  const streams = data.map((name) => {
+    return file(name, generatedBundle.output.map(o => o.code).join(" "), { src: true })
       .pipe(plumber())
       .pipe(sourcemaps.init({ loadMaps: true }))
       .pipe(f)
       .pipe(uglify())
       .pipe(sourcemaps.write('./'))
       .pipe(gulp.dest(buildPath));
-    });
-    return merge(streams);
   });
+
+  return merge(streams);
 });
 
 gulp.task('clean', function () {
@@ -71,4 +71,3 @@ gulp.task('clean', function () {
 })
 
 gulp.task('default', gulp.series('clean', 'build'))
-
