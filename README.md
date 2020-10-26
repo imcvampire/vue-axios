@@ -1,19 +1,35 @@
 # vue-axios
 A small wrapper for integrating axios to Vuejs
 
+## Support matrix
+
+|VueJS \ VueAxios|1.x|2.x|3.x|
+|-|-|-|-|
+|1.x|&#10004;|&#10004;|&#10004;|
+|2.x|&#10004;|&#10004;|&#10004;|
+|3.x|&#10060;|&#10060;|&#10004;|
+
 ## How to install:
-### CommonJS:
+### ES6 Module:
 ```bash
 npm install --save axios vue-axios
 ```
-
-And in your entry file:
+Import libraries in entry file:
 ```js
 import Vue from 'vue'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+```
 
+Usage in Vue 2:
+```js
 Vue.use(VueAxios, axios)
+```
+
+Usage in Vue 3:
+```js
+const app = Vue.createApp(...)
+app.use(VueAxios, axios)
 ```
 
 ### Script:

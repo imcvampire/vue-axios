@@ -1,49 +1,59 @@
-(function () {
+import semver from 'semver';
 
+(function () {
 /**
  * Install plugin
- * @param Vue
+ * @param app
  * @param axios
  */
 
-function plugin(Vue, axios) {
-
+function plugin(app, axios) {
   if (plugin.installed) {
-    return
+    return;
   }
-  plugin.installed = true
 
   if (!axios) {
-    console.error('You have to install axios')
-    return
+    console.error('You have to install axios');
+    return;
   }
 
-  Vue.axios = axios
-  Vue.$http = axios
+  if (semver.valid(app.version) == null) {
+    console.error('Unkown vue version');
+    return;
+  }
 
-  Object.defineProperties(Vue.prototype, {
+  plugin.installed = true;
 
-    axios: {
-      get() {
-        return axios
+  if (semver.lt(app.version, '3.0.0')) {
+    Object.defineProperties(app.prototype, {
+
+      axios: {
+        get: function get() {
+          return axios;
+        }
+      },
+
+      $http: {
+        get: function get() {
+          return axios;
+        }
       }
-    },
 
-    $http: {
-      get() {
-        return axios
-      }
-    }
+    });
+  } else {
+    app.config.globalProperties.axios = axios;
+    app.config.globalProperties.$http = axios;
+  }
 
-  })
+  app.axios = axios;
+  app.$http = axios;
 }
 
 if (typeof exports == "object") {
-  module.exports = plugin
+  module.exports = plugin;
 } else if (typeof define == "function" && define.amd) {
-  define([], function(){ return plugin })
+  define([], function(){ return plugin });
 } else if (window.Vue && window.axios) {
-  Vue.use(plugin, window.axios)
+  Vue.use(plugin, window.axios);
 }
-
 })();
