@@ -28,7 +28,7 @@
     "url": "https://github.com/imcvampire/vue-axios/issues"
   },
   "homepage": "https://github.com/imcvampire/vue-axios#readme",
-  "dependencies": {
+  "devDependencies": {
     "axios": "^0.20.0",
     "gulp-file": "^0.4.0",
     "gulp-filter": "^6.0.0",
@@ -37,12 +37,9 @@
     "gulp-sourcemaps": "^2.6.5",
     "gulp-uglify": "^3.0.2",
     "merge-stream": "^2.0.0",
-    "rollup-babel": "^0.6.3",
     "rollup-plugin-babel": "^4.4.0",
     "semver": "^7.3.2",
-    "vue": "^2.0.0"
-  },
-  "devDependencies": {
+    "vue": "^3.0.0",
     "@babel/core": "^7.12.3",
     "@babel/preset-env": "^7.12.1",
     "@rollup/plugin-commonjs": "^15.1.0",
@@ -54,6 +51,7 @@
     "rollup": "^2.32.1"
   },
   "peerDependencies": {
-    "vue": ">= 3.0.0"
+    "vue": ">= 3.0.0",
+    "axios": ">= 0.20.0"
   }
 }
