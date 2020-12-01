@@ -1,4 +1,5 @@
 import { AxiosStatic } from "axios";
+// @ts-ignore
 import { App } from "vue";
 
 declare module "@vue/runtime-core" {
