@@ -14,6 +14,11 @@ A small wrapper for integrating axios to Vuejs
 ```bash
 npm install --save axios vue-axios
 ```
+Vue 2 install
+```bash
+npm install --save axios@2.1.4 vue-axios
+```
+
 Import libraries in entry file:
 ```js
 import Vue from 'vue'
