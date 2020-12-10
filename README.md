@@ -16,7 +16,7 @@ npm install --save axios vue-axios
 ```
 Vue 2 install
 ```bash
-npm install --save axios@2.1.4 vue-axios
+npm install --save axios vue-axios@2.1.4
 ```
 
 Import libraries in entry file:
