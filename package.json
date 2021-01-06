@@ -29,7 +29,7 @@
   },
   "homepage": "https://github.com/imcvampire/vue-axios#readme",
   "devDependencies": {
-    "axios": "^0.20.0",
+    "axios": "^0.21.1",
     "gulp-file": "^0.4.0",
     "gulp-filter": "^6.0.0",
     "gulp-plumber": "^1.2.1",
