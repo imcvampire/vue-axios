@@ -54,10 +54,10 @@ gulp.task('build', async function () {
   const streams = data.map((name) => {
     return file(name, generatedBundle.output.map(o => o.code).join(" "), { src: true })
       .pipe(plumber())
-      .pipe(sourcemaps.init({ loadMaps: true }))
+      // .pipe(sourcemaps.init({ loadMaps: true }))
       .pipe(f)
       .pipe(uglify())
-      .pipe(sourcemaps.write('./'))
+      // .pipe(sourcemaps.write('./'))
       .pipe(gulp.dest(buildPath));
   });
 
