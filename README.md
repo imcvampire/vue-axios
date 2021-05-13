@@ -1,6 +1,12 @@
 # vue-axios
 A small wrapper for integrating axios to Vuejs
 
+## Why 
+
+I created this library because, in the past, I need a simple solution to migrate from vue-resource to axios.
+
+It only has a small benefit that it binds axios to the vue instance so you don't have to import everytime you use axios.
+
 ## Support matrix
 
 |VueJS \ VueAxios|1.x|2.x|3.x|
