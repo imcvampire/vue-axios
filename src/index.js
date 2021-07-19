@@ -18,7 +18,7 @@ function plugin(app, axios) {
   }
 
   if (semver.valid(app.version) == null) {
-    console.error('Unkown vue version');
+    console.error('Unknown vue version');
     return;
   }
 
