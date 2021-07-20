@@ -22,7 +22,8 @@ npm install --save axios vue-axios
 ```
 Import libraries in entry file:
 ```js
-import Vue from 'vue'
+// import Vue from 'vue'   // in Vue 2
+import * as Vue from 'vue' // in Vue 3
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 ```
