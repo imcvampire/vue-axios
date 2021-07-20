@@ -9,11 +9,11 @@ It only has a small benefit that it binds axios to the `vue` instance so you don
 
 ## Support matrix
 
-|VueJS \ VueAxios|1.x|2.x|3.x|
-|-|-|-|-|
-|1.x|&#10004;|&#10004;|&#10004;|
-|2.x|&#10004;|&#10004;|&#10004;|
-|3.x|&#10060;|&#10060;|&#10004;|
+| VueJS \ VueAxios | 1.x      | 2.x      | 3.x      |
+| ---------------- | -------- | -------- | -------- |
+| 1.x              | &#10004; | &#10004; | &#10004; |
+| 2.x              | &#10004; | &#10004; | &#10004; |
+| 3.x              | &#10060; | &#10060; | &#10004; |
 
 ## How to install:
 ### ES6 Module:
@@ -43,6 +43,9 @@ app.use(VueAxios, axios)
 Just add 3 scripts in order: `vue`, `axios` and `vue-axios` to your `document`.
 
 ## Usage:
+
+### in Vue 2
+
 This wrapper bind `axios` to `Vue` or `this` if you're using single file component.
 
 You can use `axios` like this:
@@ -58,6 +61,66 @@ this.axios.get(api).then((response) => {
 this.$http.get(api).then((response) => {
   console.log(response.data)
 })
+```
+
+### in Vue 3
+
+This wrapper bind `axios` to `app` instance or `this` if you're using single file component.
+
+in option API, you can use `axios` like this:
+
+```js
+// App.vue
+export default {
+  name: 'App',
+  methods: {
+    getList() {
+      this.axios.get(api).then((response) => {
+        console.log(response.data)
+      })
+      // or
+      this.$http.get(api).then((response) => {
+        console.log(response.data)
+      })
+    }
+  }
+}
+```
+
+however, in composition API `setup` we can't use `this`, you should use `provide` API to share the globally instance properties first, then use `inject` API to inject `axios` to `setup`:
+
+```js
+// main.ts
+import { createApp } from 'vue'
+import App from './App.vue'
+import store from './store'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
+
+const app = createApp(App).use(store)
+app.use(VueAxios, axios)
+app.provide('axios', app.config.globalProperties.axios)  // provide 'axios'
+app.mount('#app')
+
+// App.vue
+import { inject } from 'vue'
+
+export default {
+  name: 'Comp',
+  setup() {
+    const axios: any = inject('axios')  // inject axios
+
+    const getList = (): void => {
+      axios
+        .get(api)
+        .then((response: { data: any }) => {
+          console.log(response.data)
+        });
+    };
+
+    return { getList }
+  }
+}
 ```
 
 Please kindly check full documention of [axios](https://github.com/axios/axios) too 
