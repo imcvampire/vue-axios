@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue-Axios in Vue 2</title>
+  </head>
+
+  <body>
+    <div id="app">
+      <button @click="reset">reset msg</button>
+      <button @click="getMsg1">get msg by this.axios</button>
+      <button @click="getMsg2">get msg by this.$http</button>
+      <button @click="getMsg3">get msg by Vue.axios</button>
+      <button @click="getMsg4">get msg by Vue.$http</button>
+      <div v-html="msg"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@0.21.1/dist/axios.min.js"></script>
+    <script src="../../dist/vue-axios.min.js"></script>
+
+    <script type="module">
+      new Vue({
+        el: '#app',
+        data() {
+          return {
+            msg: 'Hello, World!',
+          }
+        },
+        methods: {
+          reset() {
+            this.msg = 'Hello, World!'
+          },
+          getMsg1() {
+            this.axios
+              .get('http://localhost:3000/greet')
+              .then((res) => (this.msg = res.data))
+          },
+          getMsg2() {
+            this.$http
+              .get('http://localhost:3000/greet')
+              .then((res) => (this.msg = res.data))
+          },
+          getMsg3() {
+            Vue.axios
+              .get('http://localhost:3000/greet')
+              .then((res) => (this.msg = res.data))
+          },
+          getMsg4() {
+            Vue.$http
+              .get('http://localhost:3000/greet')
+              .then((res) => (this.msg = res.data))
+          },
+        },
+      }).$mount('#app')
+    </script>
+  </body>
+</html>

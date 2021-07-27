@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue-Axios in Vue 3</title>
+  </head>
+
+  <body>
+    <div id="app"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@3.1.5/dist/vue.global.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@0.21.1/dist/axios.min.js"></script>
+    <script src="../../../dist/vue-axios.min.js"></script>
+
+    <script type="text/javascript">
+      const app = Vue.createApp({
+        template: `
+          <button @click="reset">reset msg</button>
+          <button @click="getMsg1">get msg by this.axios</button>
+          <button @click="getMsg2">get msg by this.$http</button>
+          <div v-html="msg"></div>
+        `,
+        data() {
+          return {
+            msg: 'Hello, World!',
+          }
+        },
+        methods: {
+          reset() {
+            this.msg = 'Hello, World!'
+          },
+          getMsg1() {
+            this.axios
+              .get('http://localhost:3000/greet')
+              .then((res) => (this.msg = res.data))
+          },
+          getMsg2() {
+            this.$http
+              .get('http://localhost:3000/greet')
+              .then((res) => (this.msg = res.data))
+          }
+        }
+      })
+      app.use(VueAxios, axios)
+      app.mount('#app')
+    </script>
+  </body>
+</html>
