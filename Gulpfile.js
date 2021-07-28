@@ -4,7 +4,6 @@ const plumber = require('gulp-plumber');
 const file = require('gulp-file');
 const filter = require('gulp-filter');
 const merge = require('merge-stream');
-const sourcemaps = require('gulp-sourcemaps');
 const uglify = require('gulp-uglify');
 const clean = require('gulp-clean');
 const commonjs = require('@rollup/plugin-commonjs')
@@ -23,7 +22,8 @@ const buildPath = 'dist/';
  */
 function bundleCommonJs(bundle) {
   return bundle.generate({
-    format: 'commonjs',
+    format: 'umd',
+    name: 'VueAxios'
   });
 }
 
@@ -53,12 +53,10 @@ gulp.task('build', async function () {
   const data = ['vue-axios.es5.js', 'vue-axios.min.js'];
   const streams = data.map((name) => {
     return file(name, generatedBundle.output.map(o => o.code).join(" "), { src: true })
-      .pipe(plumber())
-      // .pipe(sourcemaps.init())
-      .pipe(f)
-      .pipe(uglify())
-      // .pipe(sourcemaps.write('./'))
-      .pipe(gulp.dest(buildPath));
+    .pipe(plumber())
+    .pipe(f)
+    .pipe(uglify())
+    .pipe(gulp.dest(buildPath));
   });
 
   return merge(streams);

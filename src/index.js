@@ -1,6 +1,5 @@
 import semver from 'semver';
 
-(function () {
 /**
  * Install plugin
  * @param app
@@ -52,8 +51,9 @@ function plugin(app, axios) {
 if (typeof exports == "object") {
   module.exports = plugin;
 } else if (typeof define == "function" && define.amd) {
-  define([], function(){ return plugin });
+  define([], function () { return plugin });
 } else if (window.Vue && window.axios && window.Vue.use) { // Vue.use is only available in VueJS 2.0
   Vue.use(plugin, window.axios);
 }
-})();
+
+export default plugin;
