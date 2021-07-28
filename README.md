@@ -1,4 +1,11 @@
 # vue-axios
+
+[![npm version](https://img.shields.io/npm/v/vue-axios.svg?style=flat-square)](https://www.npmjs.org/package/vue-axios)
+[![install size](https://packagephobia.now.sh/badge?p=vue-axios)](https://packagephobia.now.sh/result?p=vue-axios)
+[![npm downloads](https://img.shields.io/npm/dm/vue-axios.svg?style=flat-square)](http://npm-stat.com/charts.html?package=vue-axios)
+[![jsdelivr](https://data.jsdelivr.com/v1/package/npm/vue-axios/badge?style=rounded)](https://www.jsdelivr.com/package/npm/vue-axios)
+[![License](https://img.shields.io/npm/l/vue-axios.svg)](https://www.npmjs.com/package/vue-axios)
+
 A small wrapper for integrating axios to Vuejs
 
 ## Why 
