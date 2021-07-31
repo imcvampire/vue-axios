@@ -1,11 +1,8 @@
-import semver from 'semver';
-
 /**
  * Install plugin
  * @param app
  * @param axios
  */
-
 function plugin(app, axios) {
   if (plugin.installed) {
     return;
@@ -16,14 +13,9 @@ function plugin(app, axios) {
     return;
   }
 
-  if (semver.valid(app.version) == null) {
-    console.error('Unknown vue version');
-    return;
-  }
-
   plugin.installed = true;
 
-  if (semver.lt(app.version, '3.0.0')) {
+  if (app.version && app.version.split('.')[0] < 3) {
     Object.defineProperties(app.prototype, {
 
       axios: {
@@ -39,9 +31,12 @@ function plugin(app, axios) {
       }
 
     });
-  } else {
+  } else if (app.version && app.version.split('.')[0] >= 3) {
     app.config.globalProperties.axios = axios;
     app.config.globalProperties.$http = axios;
+  } else {
+    console.error('Unknown Vue version');
+    return;
   }
 
   app.axios = axios;
