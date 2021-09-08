@@ -3,9 +3,9 @@ const gulp = require('gulp')
 const plumber = require('gulp-plumber')
 const file = require('gulp-file')
 const filter = require('gulp-filter')
-const uglify = require('gulp-uglify')
+const uglify = require('gulp-uglify-es').default
 const clean = require('gulp-clean')
-
+const mergeStream = require('merge-stream')
 // Rollup
 const { rollup } = require('rollup')
 const { nodeResolve } = require('@rollup/plugin-node-resolve')
@@ -47,16 +47,20 @@ gulp.task('build', async function () {
     'vue-axios.common.min.js': commonbundle,
     'vue-axios.esm.min.js': esmbundle,
   }
+  var stream = mergeStream()
 
   for (const [name, bundle] of Object.entries(data)) {
-    file(name, bundle.output.map((o) => o.code).join(' '), {
-      src: true,
-    })
-      .pipe(plumber())
-      .pipe(f)
-      .pipe(uglify())
-      .pipe(gulp.dest(buildPath))
+    stream.add(
+      file(name, bundle.output.map((o) => o.code).join(' '), {
+        src: true,
+      })
+        .pipe(plumber())
+        .pipe(f)
+        .pipe(uglify())
+        .pipe(gulp.dest(buildPath)),
+    )
   }
+  return stream;
 })
 
 gulp.task('clean', function () {
