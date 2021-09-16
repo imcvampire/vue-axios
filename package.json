@@ -41,13 +41,11 @@
     "gulp-plumber": "^1.2.1",
     "gulp-sourcemaps": "^2.6.5",
     "gulp-uglify-es": "^3.0.0",
-    "rollup": "^2.56.3"
+    "rollup": "^2.56.3",
+    "merge-stream": "^2.0.0"
   },
   "peerDependencies": {
     "axios": ">= 0.20.0",
-    "vue": "^ 3.0.0 || ^ 2.0.0"
-  },
-  "dependencies": {
-    "merge-stream": "^2.0.0"
+    "vue": "^3.0.0 || ^2.0.0"
   }
 }
