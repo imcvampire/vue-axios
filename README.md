@@ -130,4 +130,4 @@ export default {
 }
 ```
 
-Please kindly check full documention of [axios](https://github.com/axios/axios) too 
+Please kindly check full documention of [axios](https://axios-http.com) too 
