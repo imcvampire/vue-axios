@@ -8,7 +8,7 @@
 
 A small wrapper for integrating axios to Vuejs
 
-## Why 
+## Why
 
 I created this library because, in the past, I needed a simple solution to migrate from `vue-resource` to `axios`.
 
@@ -96,7 +96,7 @@ export default {
 
 however, in composition API `setup` we can't use `this`, you should use `provide` API to share the globally instance properties first, then use `inject` API to inject `axios` to `setup`:
 
-```js
+```ts
 // main.ts
 import { createApp } from 'vue'
 import App from './App.vue'
@@ -130,4 +130,79 @@ export default {
 }
 ```
 
-Please kindly check full documention of [axios](https://github.com/axios/axios) too 
+Please kindly check full documentation of [axios](https://github.com/axios/axios) too
+
+## Multiple axios instances support
+
+The library allows to have different version of axios at the same time as well as change the default registration names (e.g. `axios` and `$http`). To use this feature you need to provide options like an object where:
+- `<key>` is registration name
+- `<value>` is instance of axios
+
+For Vue it looks like this:
+```js
+// Vue 2 / Vue 3 + Composition API
+import App from './App.vue'
+import VueAxios from 'vue-axios'
+import axios from 'axios'
+import axios2 from 'axios'
+Vue.use(VueAxios, { $myHttp: axios, axios2: axios2 }) // or app.use() for Vue 3 Optiona API
+
+// usage
+export default {
+  methods: {
+    getList(){
+      this.$myHttp.get(api).then((response) => {
+        console.log(response.data)
+      })
+      this.axios2.get(api).then((response) => {
+        console.log(response.data)
+      })
+    }
+  }
+}
+```
+It works similarly in Options API of Vue 3 but if you want to use Composition API you should adjust your code a bit to extract proper keys, e.g.:
+```ts
+// Vue 2 + Setup function
+import { createApp } from 'vue'
+import App from './App.vue'
+import store from './store'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
+
+const app = createApp(App).use(store)
+app.use(VueAxios, { $myHttp: axios, axios2: axios2 })
+app.provide('$myHttp', app.config.globalProperties.$myHttp)  // provide '$myHttp'
+app.provide('axios2', app.config.globalProperties.axios2)  // provide 'axios2'
+app.mount('#app')
+
+// App.vue
+import { inject } from 'vue'
+
+export default {
+  name: 'Comp',
+  setup() {
+    const $myHttp: any = inject('$myHttp')  // inject $myHttp
+
+    const getListWithMyHttp = (): void => {
+      $myHttp
+        .get(api)
+        .then((response: { data: any }) => {
+          console.log(response.data)
+        });
+    };
+
+    const axios2: any = inject('axios2')  // inject axios2
+    const getListWithAxios2 = (): void => {
+      axios2
+        .get(api)
+        .then((response: { data: any }) => {
+          console.log(response.data)
+        });
+    };
+
+
+    return { getListWithMyHttp, getListWithAxios2 }
+  }
+}
+```
