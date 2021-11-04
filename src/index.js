@@ -1,46 +1,30 @@
 /**
  * Install plugin
  * @param app
- * @param axios
+ * @param {axios|Record<string:axios>}options
  */
-function plugin(app, axios) {
+function plugin(app, options) {
   if (plugin.installed) {
     return;
   }
 
-  if (!axios) {
-    console.error('You have to install axios');
+  const normalizedConfig = isAxiosLike(options) ? migrateToMultipleInstances(options) : options;
+  if (!isValidConfig(normalizedConfig)) {
+    console.error('[vue-axios] configuration is invalid, expected options are either <axios_instance> or { <registration_key>: <axios_instance> }');
     return;
   }
 
   plugin.installed = true;
 
-  if (app.version && app.version.split('.')[0] < 3) {
-    Object.defineProperties(app.prototype, {
-
-      axios: {
-        get: function get() {
-          return axios;
-        }
-      },
-
-      $http: {
-        get: function get() {
-          return axios;
-        }
-      }
-
-    });
-  } else if (app.version && app.version.split('.')[0] >= 3) {
-    app.config.globalProperties.axios = axios;
-    app.config.globalProperties.$http = axios;
-  } else {
-    console.error('Unknown Vue version');
+  const vueVersion = getVueVersion(app);
+  if (!vueVersion) {
+    console.error('[vue-axios] unknown Vue version');
     return;
   }
-
-  app.axios = axios;
-  app.$http = axios;
+  const handler = vueVersion < 3 ? registerOnVue2 : registerOnVue3;
+  Object.keys(normalizedConfig).forEach(registrationKey => {
+    handler(app, registrationKey, normalizedConfig[registrationKey])
+  })
 }
 
 if (typeof exports == "object") {
@@ -52,3 +36,63 @@ if (typeof exports == "object") {
 }
 
 export default plugin;
+
+/**
+ * @param {Vue} app
+ * @param {string} key
+ * @param {axios} axiosInstance
+ * @returns {void}
+ */
+function registerOnVue2(app, key, axiosInstance) {
+  Object.defineProperty(app.prototype, key, {
+    get() {
+      return axiosInstance
+    }
+  })
+  app[key] = axiosInstance;
+}
+
+/**
+ * @param {Vue} app
+ * @param {string} key
+ * @param {axios} axiosInstance
+ * @returns {void}
+ */
+function registerOnVue3(app, key, axiosInstance) {
+  app.config.globalProperties[key] = axiosInstance;
+  app[key] = axiosInstance;
+}
+
+/**
+ * @param {axios|Record<string|axios>}obj
+ * @returns {boolean}
+ */
+function isAxiosLike(obj) {
+  return obj && typeof obj.get === 'function' && typeof obj.post === 'function'
+}
+
+/**
+ * Migrates previous configuration to support multiple instances
+ * @param axiosInstance
+ * @returns {Record<string, axios>}
+ */
+function migrateToMultipleInstances(axiosInstance) {
+  return {
+    axios: axiosInstance,
+    $http: axiosInstance,
+  }
+}
+
+function isValidConfig(config) {
+  if (typeof config !== 'object') return false
+  return Object.keys(config).every(key => isAxiosLike(config[key]))
+}
+
+/**
+ * Return Vue version as a number
+ * @param {Vue} app
+ * @returns {?number}
+ */
+function getVueVersion (app) {
+  return app && app.version && Number(app.version.split('.')[0])
+}
