@@ -45,7 +45,7 @@
     "merge-stream": "^2.0.0"
   },
   "peerDependencies": {
-    "axios": ">= 0.20.0",
+    "axios": ">= 0.4.1",
     "vue": "^3.0.0 || ^2.0.0"
   }
 }
