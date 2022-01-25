@@ -4,8 +4,8 @@
  * @param {axios|Record<string:axios>}options
  */
 function plugin(app, options) {
-  if (plugin.installed) {
-    return;
+  if (app.vueAxiosInstalled) {
+    return
   }
 
   const normalizedConfig = isAxiosLike(options) ? migrateToMultipleInstances(options) : options;
@@ -13,8 +13,6 @@ function plugin(app, options) {
     console.error('[vue-axios] configuration is invalid, expected options are either <axios_instance> or { <registration_key>: <axios_instance> }');
     return;
   }
-
-  plugin.installed = true;
 
   const vueVersion = getVueVersion(app);
   if (!vueVersion) {
@@ -25,6 +23,8 @@ function plugin(app, options) {
   Object.keys(normalizedConfig).forEach(registrationKey => {
     handler(app, registrationKey, normalizedConfig[registrationKey])
   })
+  
+  app.vueAxiosInstalled = true;
 }
 
 if (typeof exports == "object") {
