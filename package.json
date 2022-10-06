@@ -29,23 +29,23 @@
   },
   "homepage": "https://github.com/imcvampire/vue-axios#readme",
   "devDependencies": {
-    "@babel/core": "^7.15.0",
-    "@babel/preset-env": "^7.15.0",
-    "@rollup/plugin-babel": "^5.3.0",
-    "@rollup/plugin-commonjs": "^15.1.0",
-    "@rollup/plugin-node-resolve": "^9.0.0",
+    "@babel/core": "^7.19.3",
+    "@babel/preset-env": "^7.19.3",
+    "@rollup/plugin-babel": "^5.3.1",
+    "@rollup/plugin-commonjs": "^22.0.2",
+    "@rollup/plugin-node-resolve": "^14.1.0",
     "gulp": "^4.0.2",
     "gulp-clean": "^0.4.0",
     "gulp-file": "^0.4.0",
     "gulp-filter": "^7.0.0",
     "gulp-plumber": "^1.2.1",
-    "gulp-sourcemaps": "^2.6.5",
+    "gulp-sourcemaps": "^3.0.0",
     "gulp-uglify-es": "^3.0.0",
-    "rollup": "^2.56.3",
-    "merge-stream": "^2.0.0"
+    "merge-stream": "^2.0.0",
+    "rollup": "^2.79.1"
   },
   "peerDependencies": {
-    "axios": ">= 0.20.0",
-    "vue": "^3.0.0 || ^2.0.0"
+    "axios": ">=1.0.0",
+    "vue": "^3.2.40"
   }
 }
