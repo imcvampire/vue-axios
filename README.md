@@ -14,14 +14,6 @@ I created this library because, in the past, I needed a simple solution to migra
 
 It only binds axios to the `vue` instance so you don't have to import everytime you use `axios`.
 
-## Support matrix
-
-| VueJS \ VueAxios | 1.x      | 2.x      | 3.x      |
-| ---------------- | -------- | -------- | -------- |
-| 1.x              | &#10004; | &#10004; | &#10004; |
-| 2.x              | &#10004; | &#10004; | &#10004; |
-| 3.x              | &#10060; | &#10060; | &#10004; |
-
 ## How to install:
 ### ES6 Module:
 ```bash
