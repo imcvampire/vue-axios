@@ -13,6 +13,7 @@ jobs:
         with:
           node-version: 12
       - run: npm ci
+      - run: mkdir dist
       - run: npx gulp
 
   publish-npm:
