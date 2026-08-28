@@ -25,6 +25,7 @@ jobs:
           node-version: 12
           registry-url: https://registry.npmjs.org/
       - run: npm ci
+      - run: mkdir dist
       - run: npx gulp
       - run: npm publish
         env:
