@@ -1,29 +1,37 @@
-import { AxiosStatic } from "axios";
-// @ts-ignore
+import { AxiosInstance, AxiosStatic } from "axios";
 import { App } from "vue";
+
+type VueAxiosInstance = AxiosInstance | AxiosStatic;
+
+declare module "vue" {
+  export interface ComponentCustomProperties {
+    $http: VueAxiosInstance;
+    axios: VueAxiosInstance;
+  }
+}
 
 declare module "@vue/runtime-core" {
   export interface ComponentCustomProperties {
-    $http: AxiosStatic;
-    axios: AxiosStatic;
+    $http: VueAxiosInstance;
+    axios: VueAxiosInstance;
   }
 
   export interface App {
-    axios: AxiosStatic;
+    axios: VueAxiosInstance;
   }
 }
 
 declare module 'vue/types/vue' {
   interface Vue {
-    $http: AxiosStatic;
-    axios: AxiosStatic;
+    $http: VueAxiosInstance;
+    axios: VueAxiosInstance;
   }
 
   interface VueConstructor {
-    axios: AxiosStatic;
+    axios: VueAxiosInstance;
   }
 }
 
-declare function VueAxios(app: App, axios: AxiosStatic): void;
+declare function VueAxios(app: App, axios: VueAxiosInstance | Record<string, VueAxiosInstance>): void;
 
 export default VueAxios;
